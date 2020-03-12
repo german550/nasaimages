@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
-function App() {
+function App(){
+  const [image, setImage] = useState('');
+  const [text, setText] = useState('');
+  // const [fact, setFact] = useState('')
+
+  function getNasImage(){
+    fetch('https://spaceimages.herokuapp.com')
+          .then(response => response.json())
+          .then(data => {setImage(data.hdurl); setText(data.description)});
+
+    }
+
+  //   function getCatFact(){
+  //     fetch('http://localhost:3001/cats_facts')
+  //           .then(response => response.json())
+  //           .then(data => setFact(data.text))
+  // }
+  useEffect(()=>{
+    getNasImage();
+    // getCatFact()
+  },[])
+  //
+  // const showImage = () =>
+  // images.forEach(image => (
+  //   <img src={image} alt="">
+  // ))
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img src={image} alt=""/>
+      <p>{text}</p>
     </div>
   );
 }
