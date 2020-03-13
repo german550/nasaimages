@@ -30,7 +30,7 @@ function App(){
 
   return (
     <div className="App">
-      <img src={image} alt=""/>
+      <img className="pic" src={image} alt=""/>
       <p>{text}</p>
     </div>
   );
